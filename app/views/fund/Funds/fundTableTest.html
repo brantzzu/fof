@@ -1,0 +1,48 @@
+
+    <table id="table"
+           data-toggle="table"
+           data-pagination="true"
+           data-search="true"
+           page_size:20
+           data-advanced-search="true"
+           data-id-table="advancedTable"
+           data-url="/fundsJson">
+        <thead>
+        		<tr>
+            		<th  class="uk-width-2-4" data-field="fund_name" data-sortable="true">名称</th>
+            		<th class="uk-width-1-4" data-field="fund_code" data-sortable="true">最新净值</th>
+            		<th class="uk-width-1-4" data-field="fund_code" data-sortable="true">日涨幅</th>
+        		</tr>
+    	</thead>
+    	<tbody>
+    	
+    	
+    	</tbody>
+ 
+    			
+    </table>
+    <script type="text/javascript">
+		var table = document.getElementById("table");
+		if (table != null) {
+		    for (var i = 0; i < table.rows.length; i++) {
+		        for (var j = 0; j < table.rows[i].cells.length; j++)
+		        table.rows[i].cells[j].onclick = function () {
+			
+		            tableText(this);
+		        };
+		    }
+		}
+
+		function tableText(tableCell) {
+		    alert(tableCell.innerHTML);
+		}
+		</script>
+<script type="text/javascript" language="javascript"  src="/public/javascripts/jquery.min.js"></script>
+<script type="text/javascript" language="javascript"  src="/public/javascripts/bootstrap.min.js"></script>
+<script type="text/javascript" language="javascript"  src="/public/javascripts/bootstrap-table.js"></script>
+<script type="text/javascript" language="javascript"  src="/public/javascripts/bootstrap-table-toolbar.js"></script>
+<script type="text/javascript" language="avascript" src="/public/javascripts/ga.js"></script>
+<link href="/public/stylesheets/bootstrap.min.css" rel="stylesheet">
+<link href="/public/stylesheets/bootstrap-table.css" rel="stylesheet">
+<link href="/public/stylesheets/examples.css" rel="stylesheet">
+

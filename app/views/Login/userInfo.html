@@ -1,0 +1,28 @@
+#{extends 'main.html' /}
+#{set title:"用户信息" /}
+#{set headerTitle:"用户信息如下，请返回查看" /}
+
+<div class="ui-form ui-border-t">
+    <form action="#">
+        <div class="ui-form-item ui-form-item-show ui-form-item-link ui-border-b">
+            <label for="user.name">用户名</label>
+            <input type="text" value="${user.name}" id="user.name" readonly>
+        </div>
+        <div class="ui-form-item ui-form-item-show ui-form-item-link ui-border-b">
+            <label for="user.phone">手机号码</label>
+            <input type="text" value="${user.phone}" id="user.phone" readonly>
+        </div>
+        <div class="ui-form-item ui-form-item-show ui-form-item-link ui-border-b">
+            <label for="user.birthday">生日</label>
+            <input type="text" value="${user.birthday.format('yyyy-MM-dd')}" id="user.birthday" readonly>
+        </div>
+        <div class="ui-form-item ui-form-item-show ui-form-item-link ui-border-b">
+            <label for="user.userType">风险偏好</label>
+            <input type="text" value="${user.userType.name}" id="user.userType" readonly>
+        </div>
+        <div class="ui-form-item ui-form-item-show ui-form-item-link ui-border-b">
+            <label for="openid">openid</label>
+            <input type="text" value="${openid}" id="openid" readonly>
+        </div>
+    </form>
+</div>

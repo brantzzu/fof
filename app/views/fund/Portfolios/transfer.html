@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>基金组合列表</title>
+		<link href="http://cdn.bootcss.com/uikit/2.26.3/css/uikit.min.css" rel="stylesheet">
+		<link href="//cdn.bootcss.com/uikit/2.26.3/css/components/sticky.css">
+		<link href="/public/stylesheets/fund/Portfolios/list.css" rel="stylesheet" >
+		<link href="/public/stylesheets/index.css" rel="stylesheet">
+		#{get 'moreCss' /}
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/uikit/2.26.3/js/uikit.min.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/sticky.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/pagination.js"></script>
+		#{get 'moreScripts'/}
+	</head>
+	<body>
+		<div class="uk-grid uk-text-center" >
+			<div class="uk-width-1-1" id="portfolioHead">
+				<h2>调仓记录</h2>
+			</div>
+		</div>
+		<div class="uk-grid  uk-margin-top-remove" id="infoList">
+					<div class="uk-width-1-1" style="background-color:#f5f5f5;line-height:150%">
+						<div class="uk-panel uk-panel-box">
+							<div class="uk-grid">
+								<div class="uk-width-2-3">
+									成立以来累计调仓
+								</div>
+								<div class="uk-width-1-3">
+									<p class="uk-vertical-align-bottom"><h2>${times}次</h2></p>
+								</div>
+								<div class="uk-width-1-1"><hr class="uk-grid-divider"></div>
+							</div>
+						</div>
+					</div>
+		</div>
+		<div class="uk-grid uk-margin-top-remove">
+			<div class="uk-width-1-1">
+				<table class="uk-table">
+				    <tbody>
+				    	#{list transfers,as:'p'}
+				        <tr>
+				            <td>#{if p.flag=="buy"}<i class="uk-icon-plus-square uk-icon-medium" style="color:green"></i>#{/if}#{else}<i class="uk-icon-minus-square uk-icon-medium" style="color:red"></i>#{/else}</td>
+				            <td>${p.productName}</td>
+				            <td>${p.date}</td>
+				        </tr>
+				        #{/list}
+				    </tbody>
+				</table>
+			</div>
+		</div>
+		
+    #{include "footer.html" /}
+	</body>
+</html>

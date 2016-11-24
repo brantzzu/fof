@@ -1,0 +1,37 @@
+#{set 'scripts'}
+	<script>
+	$(".ui-collections").click(function(){
+		var id = $(this).attr("data-id"); 
+		$.post('/profiles/mycollection',{"id":id}, function(response,status,xhr){ 
+			console.log(status); 
+			console.log(xhr); 
+			  var dia=$.dialog({
+			        title:'温馨提示',
+			        content:response,
+			        button:["确认"]
+			    });
+			}); 
+	});
+	</script>
+#{/set}
+
+<table class="ui-table ui-border-tb" style="line-height:200%">
+	<thead>
+		<tr>
+			<th>组合名称</th>
+			<th>组合净值</th>
+			<th>较前一交易日增长率</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		#{list navs,as:'nav'}
+		<tr>
+			<td><a class="" href="/portfolio/detail?portfolioId=${nav.portfolio.id}">${nav.portfolio.name}</a></td>
+			<td>${nav.nav.format("0.0000")}</td>
+			<td>${nav.dailyGrowthRate.multiply(100).format("0.00")}%</td>
+			<td><a class="ui-collections" data-id="${nav.portfolio.id}">收藏</a> <a href="#">购买</a></td>
+		</tr>
+		#{/list}
+	</tbody>
+</table>

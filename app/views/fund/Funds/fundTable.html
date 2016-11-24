@@ -1,0 +1,61 @@
+    <link href="/public/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/stylesheets/bootstrap-table.css" rel="stylesheet">
+    <script src="/public/javascripts/jquery.min.js"></script>
+    <script src="/public/javascripts/bootstrap.min.js"></script>
+    <script src="/public/javascripts/bootstrap-table.js"></script>
+
+ <table id="table" class="table table-striped"
+        data-toggle="table"
+               data-toolbar="#toolbar"
+               >
+        <thead>
+            <tr>
+                <th data-field="fund_name" data-sortable="true" >名称</th>
+                <th data-field="nav" data-sortable="true" >最新净值</th>
+                <th data-field="accumulatedNav" data-sortable="true">最新累计净值</th>
+                <th data-field="dailyGrowthRate" data-sortable="true" >日涨幅</th>
+            </tr>
+        </thead>
+    </table>
+<script>
+    $('#table').bootstrapTable({
+    url: '${jsonParameter}',
+    search: true,
+    pagination: true,
+    sortable: true,
+    sortOrder: "fund_name asc",
+    searchOnEnterKey: true,
+    columns: [{
+        field: 'fund_name',
+        title: '名称',
+        formatter: function (value, row, index) {  
+            var str = value
+        	var regExp = /\(([^)]+)\)/g;
+        	var matches = str.match(regExp);
+            //var fund_code = str.substring(str.indexOf("(")+1,str.indexOf(")"))
+            var match_str = matches[matches.length -1]
+            //alert(fund_code);
+            var fund_code = match_str.substring(1, match_str.length - 1)
+            var a = '<a href="/fund/info/'+fund_code+'" >'+value+'</a>'; 
+            return a; 
+            }
+        		
+    }, {
+        field: 'nav',
+        title: '最新净值'
+    }, 
+    {
+        field: 'accumulatedNav',
+        title: '最新累计净值'
+    }, 
+    {
+        field: 'dailyGrowthRate',
+        title: '日涨幅',
+        formatter: function (value, row, index) {  
+            var str = value + '%'
+            return str; 
+            }
+    }, 
+    ]
+});
+</script>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>基金信息-</title>
+		<link href="http://cdn.bootcss.com/uikit/2.26.3/css/uikit.min.css" rel="stylesheet">
+		<link href="//cdn.bootcss.com/uikit/2.26.3/css/components/sticky.css" rel="stylesheet">
+		<link href="/public/stylesheets/fund/Funds/fundInfo.css" rel="stylesheet">
+		<link href="/public/stylesheets/index.css" rel="stylesheet">
+		#{get 'moreCss' /}
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/uikit/2.26.3/js/uikit.min.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/sticky.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/pagination.js"></script>
+		<script src="//cdn.bootcss.com/echarts/3.2.1/echarts.min.js"></script>
+		#{get 'moreScripts'/}
+	</head>
+	<body>
+		#{include "./fundInfo-head.html" /}
+		<div class="uk-grid">
+			<div class="uk-width-1-1">
+				<div id="mainCharts" style="height:300px;">
+				
+				</div>
+			</div>
+			<div class="uk-width-1-1">
+				<table class="uk-table uk-table-striped uk-table-hover">
+				    <thead>
+				        <tr>
+				            <th class="uk-width-1-3">时间</th>
+				            <th class="uk-width-1-3">收益</th>
+				            <th class="uk-width-1-3">沪深300</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr>
+				            <td>近一月</td>
+				            <td>${(fund?.latest_month_return/100)?.format("0.00%")}</td>
+				            <td></td>
+				        </tr>
+				        <tr>
+				            <td>近三月</td>
+				            <td>${(fund?.latest_3month_return/100)?.format("0.00%")}</td>
+				            <td></td>
+				        </tr>
+				        <tr>
+				            <td>近半年</td>
+				            <td>${(fund?.latest_6month_return/100)?.format("0.00%")}</td>
+				            <td></td>
+				        </tr>
+				        <tr>
+				            <td>近一年</td>
+				            <td>${(fund?.latest_year_return/100)?.format("0.00%")}</td>
+				            <td></td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
+		</div>
+		#{include "footer.html" /}
+		
+		<script>
+			$(document).ready(function(){
+				$('[data-uk-pagination]').on('select.uk.pagination', function(e, pageIndex){
+				    window.location.href="/fund/data/${fundType}/"+(pageIndex);
+				});
+				
+				$('#fundInfo-tabindex ul li').removeClass("uk-active");
+				$('#fundInfo-tabindex ul li:nth-child(1)').addClass("uk-active");
+			}); 
+		</script>
+		<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('mainCharts'));
+
+        // 指定图表的配置项和数据
+        var 
+        option = {
+        	    tooltip: {
+        	        trigger: 'axis',
+        	        position: function (pt) {
+        	            return [pt[0], '10%'];
+        	        }
+        	    },
+        	    title: {
+        	        left: 'center',
+        	        text: '收益走势',
+        	    },
+        	    legend: {
+        	        top: 'bottom',
+        	        data:['收益走势']
+        	    },
+        	    toolbox: {
+        	        show:false
+        	    },
+        	    xAxis: {
+        	        type: 'category',
+        	        boundaryGap: false,
+        	        data: [${dates_6}]
+        	    },
+        	    yAxis: {
+        	        type: 'value',
+        	        boundaryGap: [0, '100%']
+        	    },
+        	    series: [
+        	        {
+        	            name:'收益率%',
+        	            type:'line',
+        	            smooth:true,
+        	            symbol: 'none',
+        	            itemStyle: {
+        	                normal: {
+        	                    color: 'rgb(255, 70, 131)'
+        	                }
+        	            },
+        	            areaStyle: {
+        	                normal: {
+        	                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+        	                        offset: 0,
+        	                        color: 'rgb(255, 158, 68)'
+        	                    }, {
+        	                        offset: 1,
+        	                        color: 'rgb(255, 70, 131)'
+        	                    }])
+        	                }
+        	            },
+        	            data: [${values_6}]
+        	        }
+        	    ]
+        	};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+ 
+	</body>
+</html>

@@ -1,0 +1,24 @@
+# Application dependencies
+
+require:
+    - play
+    - play -> router 1.3 
+    - play -> secure
+    - play -> deadbolt 1.4.1
+    - play -> pdf 0.9
+    - net.sf.json-lib -> json-lib 2.4 jdk1.5
+repositories:
+    - mavenCentral:
+        type: iBiblio
+        root: "http://nexus.xxb.cn/content/groups/public/"
+        contains:
+            - com.oracle -> *
+            - com.novell.ldap -> *
+            - com.rabiitmq -> *
+            - commons-cli -> * 
+            - net.sf.json-lib -> *
+#    - playModules:
+#        type: http
+#        artifact: "http://repo.xxb.cn/modules/[module]-[revision].zip"
+#        contains:
+#            - play -> *

@@ -1,0 +1,10 @@
+#portfolioHead { 
+	background-color: #f70a0a;
+    min-height: 60px;
+}
+
+#portfolioHead  h2 { 
+	color:white; 
+	font-weight:bold;
+	margin-top:10px;
+}

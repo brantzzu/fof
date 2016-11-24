@@ -1,0 +1,30 @@
+#{extends 'main.html' /}
+#{set title:"收藏的基金组合" /}
+#{set headerTitle:"收藏的基金组合" /}
+
+<section id="table">
+	<div>
+		<p>您收藏的基金组合有：</p>
+		<table class="ui-table ui-border-tb" style="line-height: 200%">
+			<thead>
+				<tr>
+					<th>组合名称</th>
+					<th>组合净值</th>
+					<th>较前一交易日增长率</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				#{list collections,as:'fund'}
+				<tr>
+					<td><a class=""
+						href="/portfolio/detail?portfolioId=${fund.portfolio.id}">${fund.portfolio.name}</a></td>
+					<td>${fund.portfolio.latestNav().nav.format("0.0000")}</td>
+					<td>${fund.portfolio.latestNav().dailyGrowthRate.multiply(100).format("0.00")}%</td>
+					<td><a href="#">购买</a></td>
+				</tr>
+				#{/list}
+			</tbody>
+		</table>
+	</div>
+</section>

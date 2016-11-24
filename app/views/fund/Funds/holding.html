@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>基金信息-${fundType}</title>
+		<link href="http://cdn.bootcss.com/uikit/2.26.3/css/uikit.min.css" rel="stylesheet">
+		<link href="//cdn.bootcss.com/uikit/2.26.3/css/components/sticky.css" rel="stylesheet">
+		<link href="/public/stylesheets/fund/Funds/fundInfo.css" rel="stylesheet">
+		#{get 'moreCss' /}
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/uikit/2.26.3/js/uikit.min.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/sticky.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/pagination.js"></script>
+		<script src="//cdn.bootcss.com/echarts/3.2.1/echarts.min.js"></script>
+		#{get 'moreScripts'/}
+	</head>
+	<body>
+		#{include "./fundInfoHead.html" /}
+		<div class="uk-grid">
+			<div class="uk-width-1-1">
+				<div class="uk-alert uk-alert-large">
+				    #{if reportYear != "" }
+					<h4>持仓季度： ${reportYear}</h4>
+					#{/if}
+					#{else}
+					<h4>暂无该基金的持仓信息</h4>
+					#{/else}			
+				</div>
+				<table class="uk-table uk-table-striped uk-table-hover">
+				    <thead>
+				        <tr>
+				            <th class="uk-width-1-3">股票名称</th>
+				            <th class="uk-width-1-3">占净值比例</th>
+				            <th class="uk-width-1-3">持股数(万股)</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    	#{list holdings,as:'t'}
+				        <tr>
+				            <td>${t?.stockName}(${t.stockCode})</td>
+				            <td>${(t?.proportionOfNav/100)?.format("0.00%")}</td>
+				            <td>${(t?.holdingsMillion).format("0.00")}</td>
+				        </tr>
+				        #{/list}
+				    </tbody>
+				</table>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function(){
+				$('#fundInfo-tabindex ul li').removeClass("uk-active");
+				$('#fundInfo-tabindex ul li:nth-child(3)').addClass("uk-active");
+			}); 
+		</script>
+	</body>
+</html>

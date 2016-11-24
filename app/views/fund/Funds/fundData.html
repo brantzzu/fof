@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>基金列表-${fundType}</title>
+		<link href="http://cdn.bootcss.com/uikit/2.26.3/css/uikit.min.css" rel="stylesheet">
+		<link href="//cdn.bootcss.com/uikit/2.26.3/css/components/sticky.css">
+		#{get 'moreCss' /}
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/uikit/2.26.3/js/uikit.min.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/sticky.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/pagination.js"></script>
+		#{get 'moreScripts'/}
+	</head>
+	<body>
+		<nav class="uk-navbar" data-uk-sticky>
+			<ul class="uk-navbar-nav">
+				<li><a href="/fund/list">全部</a></li>
+				#{list items:types,as:'type'} 
+				#{if type==fundType}
+				<li class="uk-active"><a href="/fund/data/${type}/0">${type}</a></li>
+				#{/if}
+				#{else}
+				<li><a href="/fund/data/${type}/0">${type}</a></li>
+				#{/else}
+				#{/list}
+			</ul>
+		</nav>
+		#{if fundType == "货币市场型基金"}
+		#{include "./currencyFundTable.html" /}
+		#{/if}
+		#{else}
+		#{include "./fundTable.html" /}
+		#{/else}
+		<!-- 
+		<ul class="uk-pagination" data-uk-pagination="{items:${count}, pages:${pages},currentPage:${page},displayedPages:5}"></ul>
+		<script>
+			$(document).ready(function(){
+				$('[data-uk-pagination]').on('select.uk.pagination', function(e, pageIndex){
+				    window.location.href="/fund/data/${fundType}/"+(pageIndex);
+				});
+			}); 
+		</script>
+		 -->
+	</body>
+</html>

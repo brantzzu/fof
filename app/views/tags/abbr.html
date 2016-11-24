@@ -1,0 +1,13 @@
+%{
+    size=(_size==null?20:_size)
+}%
+#{if _obj!=null}
+	#{if _obj.size()>size} 
+	    <span data-uk-tooltip title="${_obj}">
+	        ${_obj[0..size]} 
+	    </span>
+	#{/if}
+	#{else}
+	    ${_obj} 
+	#{/else}
+#{/if}

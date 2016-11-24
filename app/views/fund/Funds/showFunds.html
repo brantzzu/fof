@@ -1,0 +1,48 @@
+<div class="uk-width-1-1">  
+     <div class="uk-panel uk-panel-box pager-background" data-uk-sticky="{top:40}">
+        <div class="uk-grid">
+            <div class="uk-width-2-4">共${pages}页，当前显示第${page+1}页.跳转到第<input type="text" value="" size="4" name="goPage"/>页</div>
+            <div class="uk-width-2-4">
+                <ul class="uk-pagination uk-align-left" data-uk-pagination="{pages:${pages},currentPage:${page}}">
+                </ul>
+            </div>
+        </div>
+    </div>
+     <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed" border="1" >
+        <thead>
+            <tr>
+                <th class="uk-width-2-10">id</th>
+                <th class="uk-width-3-10">名称</th>
+                <th class="uk-width-1-10">代码</th>
+                <th class="uk-width-1-10">类型</th>
+                <th class="uk-width-2-10">投资类型1</th>
+                <th class="uk-width-1-10">投资类型2</th>
+            </tr>
+        </thead>
+        <tbody>
+            #{list infos,as:'fund'} 
+            <tr>
+                <td>
+                    ${fund.id}
+                </td>
+                <td>
+                    #{abbr obj:fund.name,size:50 /}
+                </td>
+                <td>#{abbr obj:fund.code,size:10 /}</td>
+                <td>#{abbr obj:fund.fundTypeCode,size:10 /}</td>
+                <td>#{abbr obj:fund.investmentType1,size:10 /}</td>
+                <td>#{abbr obj:fund.investmentType2,size:10 /}</td>
+            </tr>
+            #{/list}
+        </tbody>
+    </table>
+    <div class="uk-panel uk-panel-box pager-background" >
+        <div class="uk-grid">
+            <div class="uk-width-2-4">共${pages}页，当前显示第${page+1}页.跳转到第<input type="text" value="" size="4" name="goPage"/>页</div>
+            <div class="uk-width-2-4">
+	            <ul class="uk-pagination uk-align-left" data-uk-pagination="{pages:${pages},currentPage:${page}}">
+	            </ul>
+            </div>
+        </div>
+    </div>
+</div>

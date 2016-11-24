@@ -1,0 +1,9 @@
+#fundHead { background-color:red;}
+#fundHead div * { color:white}
+
+#fund-basicInfo {background-color: #efefef} 
+#fundInfo-tabindex * a{padding:8px 5px 8px 5px!important }
+.uk-button {
+  background-color: #A4A4A4;
+  
+}

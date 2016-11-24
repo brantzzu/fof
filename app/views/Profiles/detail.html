@@ -1,0 +1,37 @@
+#{extends 'main.html' /} 
+#{set title:"组合详细信息" /} 
+#{set headerTitle:nav.portfolio.name /}
+#{set 'scripts'}
+	<script>
+	(function (){
+        var tab = new fz.Scroll('.ui-tab', {
+	        role: 'tab',
+	        autoplay: false
+	    });
+	    /* 滑动开始前 */
+	    tab.on('beforeScrollStart', function(fromIndex, toIndex) {
+	        console.log(fromIndex,toIndex);// from 为当前页，to 为下一页
+	    })
+	})();
+	</script>
+#{/set}
+ <div class="fof-block">
+            <ul class="ui-tiled">
+            <li><div><h1>${nav.nav.format("0.0000")}</h1></div><i>${nav.dailyGrowthRate.multiply(100).format("0.00")}%</i><div>(${nav.navDate})</div></li>
+            <li><div>类型</div><i>近3月收益</i></li>
+            <li><div>规模</div><i>近1年收益</i></li>
+            </ul>
+ </div>
+
+<div class="ui-tab">
+    <ul class="ui-tab-nav ui-border-b">
+        <li class="current">净值走势</li>
+        <li>产品详情</li>
+        <li>资产配置</li>
+    </ul>
+    <ul class="ui-tab-content" style="width:300%">
+        <li>#{include "./trend.html"/}</li>
+        <li>#{include "./info.html"/}</li>
+        <li>#{include "./asset.html"/}</li>
+    </ul>
+</div>

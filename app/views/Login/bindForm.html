@@ -1,0 +1,43 @@
+#{extends 'main.html' /}
+#{set title:"绑定帐号" /}
+#{set headerTitle:"查看信息前请首先填写用户信息" /}
+
+<div class="ui-form ui-border-t">
+    <form action="/bind" method="post">
+    	<input type="hidden" name="openid" value="${openid}" />
+        <div class="ui-form-item ui-border-b">
+            <label>手机号码</label>
+            <input type="text" id="phone" name="user.phone" placeholder="13位手机号码">
+            <a href="javascript:clearPhone();" class="ui-icon-close">
+            </a>
+        </div>
+        <div class="ui-form-item ui-border-b">
+            <label>风险偏好</label>
+            <div class="ui-select">
+                <select name="user.userType.id"> 
+                	<option value="">请选择投资风险偏好</option>
+                	#{list types,as:'type'}
+                		<option value="${type.id}">${type.name}</option>
+                	#{/list}
+                </select>
+            </div>
+        </div>
+        <div class="ui-form-item ui-border-b">
+            <label for="birthday">出生日期</label>
+            <input type="text" id="birthday" name="user.birthday" placeholder="格式:2000-01-01">
+        </div>
+		<div class="ui-btn-wrap ui-center">
+		    <button class="ui-btn ui-btn-primary" type="submit">确定</button>
+		</div>
+    </form>
+</div>
+        
+
+#{set 'scripts'}
+	<script>
+		function clearPhone() { 
+			$("#phone").val(""); 	
+		}
+	</script>
+#{/set}
+        

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>基金信息-${fundType}</title>
+		<link href="http://cdn.bootcss.com/uikit/2.26.3/css/uikit.min.css" rel="stylesheet">
+		<link href="//cdn.bootcss.com/uikit/2.26.3/css/components/sticky.css" rel="stylesheet">
+		<link href="/public/stylesheets/fund/Funds/fundInfo.css" rel="stylesheet">
+		#{get 'moreCss' /}
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/uikit/2.26.3/js/uikit.min.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/sticky.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/pagination.js"></script>
+		<script src="//cdn.bootcss.com/echarts/3.2.1/echarts.min.js"></script>
+		#{get 'moreScripts'/}
+	</head>
+	<body>
+		#{include "./fundInfoHead.html" /}
+		<div class="uk-grid">
+				<!-- 基金评价第1年 -->
+			<div class="uk-width-1-1">
+			<div class="uk-alert uk-alert-large">
+					<h4>基金评价近一年(${e1?.startDate}-${e1?.endDate})</h4>
+				</div>
+			<ul class="uk-tab" data-uk-tab="{connect:'#my-id'}">
+			    <li><a href="">收益</a></li>
+			    <li><a href="">风险</a></li>
+			    <li><a href="">风险调整后的收益</a></li>
+			</ul>
+
+			<!-- 包含内容项目的容器 -->
+			<ul id="my-id" class="uk-switcher uk-margin">
+			    <li>
+			    	<div class="uk-panel uk-panel-box">
+				    <h3 class="uk-panel-title"><b>收益</b></h3>
+					    <dl class="uk-description-list-line">
+						    <dt>总收益</dt>
+						    <dd>${e1?.totalProfit}</dd>
+						    <dt>选股收益</dt>
+						    <dd>${e1?.selectivity}</dd>
+						    <dt>择时收益</dt>
+						    <dd>${e1?.timing}</dd>
+						    <dt>被动持有收益</dt>
+						    <dd>${e1?.passiveHolding}</dd>
+						</dl>
+					</div>
+			    </li>
+			    <li>
+			    	<div class="uk-panel uk-panel-box">
+				    <h3 class="uk-panel-title"><b>风险</b></h3>
+					    <dl class="uk-description-list-line">
+						    <dt>总风险</dt>
+						    <dd>${e1?.totalRisk}</dd>
+						    <dt>非系统性风险</dt>
+						    <dd>${e1?.nonSystematicRisk}</dd>
+						    <dt>系统性风险</dt>
+						    <dd>${e1?.systematicRisk}</dd>
+						    <dt>被动持有风险</dt>
+						    <dd>${e1?.passiveHoldingRisk}</dd>
+						    <dt>择时风险</dt>
+						    <dd>${e1?.timingRisk}</dd>
+						    <dt>其他风险 95%VaR</dt>
+						    <dd>${e1?.otherRisk}</dd>
+						    <dt>其他风险 最大回撤比例</dt>
+						    <dd>${e1?.otherRiskMaxdown}</dd>
+						</dl>
+					</div>
+			    </li>
+			    <li>
+			    	<div class="uk-panel uk-panel-box">
+				    <h3 class="uk-panel-title"><b>风险调整后收益</b></h3>
+					    <dl class="uk-description-list-line">
+						    <dt>风险调整后收益_alpha收益</dt>
+						    <dd>${e1?.alphaProfit}</dd>
+						    <dt>风险调整后收益_夏普比</dt>
+						    <dd>${e1?.sharpeRatio}</dd>
+						    <dt>风险调整后收益_信息比</dt>
+						    <dd>${e1?.inforRatio}</dd>
+						    <dt>风险调整后收益_收益回撤比</dt>
+						    <dd>${e1?.drawnDown}</dd>
+						</dl>
+					</div>
+			    </li>
+			</ul>
+			</div>
+			
+				
+		</div>
+	
+		<script>
+			$(function(){
+				$('#fundInfo-tabindex ul li').removeClass("uk-active");
+				$('#fundInfo-tabindex ul li:nth-child(5)').addClass("uk-active");
+			}); 
+		</script>
+	
+	</body>
+</html>

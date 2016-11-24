@@ -1,0 +1,37 @@
+#functionPanel  .uk-panel-box { 
+	padding-left:0!important; 
+	padding-right:0!important; 
+}
+
+p{font-size:14px;}
+span{font-size:14px;}
+ul {margin: 0px; padding: 0px;}
+li{list-style: none;}
+a{ text-decoration:none;}
+.bodydiv{ max-width: 500px; margin: auto;}
+.clear{ clear:both;}
+body{ margin:0px auto; padding:0px;  font-family:"微软雅黑"; font-size:14px;}
+
+#footer { 
+	position :fixed;
+	bottom:0px;
+	left : 0px ;
+	width:100%;
+	background-color:#efefef;
+}
+
+#footer .uk-icon-large { 
+	color:#07d; 	
+}
+
+/*分类栏*/
+.classification{width:100%; height:auto; }
+.classification div{ width:95%; margin:auto;}
+.classification .cbox{ width:25%; padding-top:10px; float:left;}
+.classification .icon{ width:60px; height:60px;  margin:auto; }
+.classification .icon img{width: 60px; height: 60px;}
+.classification p{ font-size:12px; text-align:center; line-height:15px; color: #404040;}
+
+/*基金组合展示*/
+.btmn{width:98%; height:auto;  margin:auto; margin-top: 10px ;padding:0px 1%;font-weight:bold;font-size: 18px; color: #000000; }
+

@@ -1,0 +1,90 @@
+#{extends 'main.html' /} 
+#{set title:'基金信息查询' /}
+#{set 'moreCss'} 
+ <link href="//cdn.bootcss.com/uikit/2.22.0/css/components/progress.min.css" rel="stylesheet">
+ <link href="http://cdn.bootcss.com/uikit/2.22.0/css/components/notify.min.css" rel="stylesheet">
+ <link href="http://cdn.bootcss.com/uikit/2.22.0/css/components/sticky.min.css" rel="stylesheet">
+#{/set}
+#{set 'moreScripts'}
+<script src="http://cdn.bootcss.com/uikit/2.22.0/js/components/pagination.min.js"></script>
+<script src="http://cdn.bootcss.com/uikit/2.22.0/js/components/notify.min.js"></script>
+<script src="http://cdn.bootcss.com/uikit/2.22.0/js/components/sticky.min.js"></script>
+<script src="http://cdn.bootcss.com/uikit/2.22.0/js/core/modal.min.js"></script>
+<script>
+   $(document).ready(function(){
+        $("#navbar>ul>li").removeClass("uk-active"); 
+        $("#navbar>ul>li:nth-child(2)").addClass("uk-active"); 
+        $('[data-uk-pagination]').on('select.uk.pagination', function(e, pageIndex){
+            window.location="/showFundHoldings/"+pageIndex; 
+        });
+        function refreshPage(){
+            window.location="/showFundHoldings/"+${page};
+        }
+        $(document).on("keypress","input[name=goPage]",function(event){ 
+            if ( event.which == 13 ) {
+                var p =$(this).val();
+                
+                if(isNaN(Number(p))==false){ 
+                    var page = Number(p)-1; 
+                    if(page<0 || page>${pages}){ 
+                        window.location.href="/showFundHoldings/0"; 
+                    }else { 
+                        window.location.href="/showFundHoldings/"+page; 
+                    }
+                }else {
+                    window.alert("请输入数字");
+                }
+            }
+        }); 
+     }); 
+</script>
+#{/set}
+
+<div class="uk-width-1-1">  
+     <div class="uk-panel uk-panel-box pager-background" data-uk-sticky="{top:40}">
+        <div class="uk-grid">
+            <div class="uk-width-2-4">共${pages}页，当前显示第${page+1}页.跳转到第<input type="text" value="" size="4" name="goPage"/>页</div>
+            <div class="uk-width-2-4">
+                <ul class="uk-pagination uk-align-left" data-uk-pagination="{pages:${pages},currentPage:${page}}">
+                </ul>
+            </div>
+        </div>
+    </div>
+     <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed" border="1" >
+        <thead>
+            <tr>
+                <th class="uk-width-2-10">id</th>
+                <th class="uk-width-3-10">基金名称</th>
+                <th class="uk-width-1-10">基金代码</th>
+                <th class="uk-width-1-10">股票代码</th>
+                <th class="uk-width-2-10">股票名称</th>
+                <th class="uk-width-1-10">持股数万股</th>
+            </tr>
+        </thead>
+        <tbody>
+            #{list infos,as:'info'} 
+            <tr>
+                <td>
+                    ${info.id}
+                </td>
+                <td>
+                    #{abbr obj:info.fund.name,size:50 /}
+                </td>
+                <td>#{abbr obj:info.fund.code,size:10 /}</td>
+                <td>#{abbr obj:info.stockCode,size:10 /}</td>
+                <td>#{abbr obj:info.stockName,size:10 /}</td>
+                <td>${info.holdingsMillion.format("0.0000")}</td>
+            </tr>
+            #{/list}
+        </tbody>
+    </table>
+    <div class="uk-panel uk-panel-box pager-background" >
+        <div class="uk-grid">
+            <div class="uk-width-2-4">共${pages}页，当前显示第${page+1}页.跳转到第<input type="text" value="" size="4" name="goPage"/>页</div>
+            <div class="uk-width-2-4">
+                <ul class="uk-pagination uk-align-left" data-uk-pagination="{pages:${pages},currentPage:${page}}">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

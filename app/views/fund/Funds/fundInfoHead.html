@@ -1,0 +1,63 @@
+<div class="uk-grid uk-text-center" id="fundHead">
+	<div class="uk-width-1-1"><h3>${fund.fund_name}</h3></div>
+	<div class="uk-width-1-1">
+	</div>
+</div>
+<div class="uk-grid uk-grid-collapse uk-margin-top-remove" id="fund-basicInfo" data-uk-grid-match="{row: false}">
+	 <div class="uk-width-1-2 uk-text-center uk-vertical-align">
+		  <div class="uk-vertical-align-middle">
+				    <h1 style="color:red">${fund.nav?.format("0.0000")}</h1>
+				    <div>${fund.dailyGrowthRate?.divide(100).format("0.00%")}(${fund.navDate})</div>
+		  </div>
+		  
+		  
+	</div>
+	<div class="uk-width-1-2">
+				<ul class="uk-grid uk-text-left uk-grid-small" data-uk-grid-margin>
+					<li class="uk-width-1-2">
+						<div class="uk-panel uk-text-left">
+						    <h3 class="uk-panel-title uk-margin-remove">基金类型</h3>
+						    <b>${fund?.investmentType1}</b>
+						</div>
+					</li>	
+			 			
+					<li class="uk-width-1-2">
+						<div class="uk-panel uk-text-left">
+						    <h3 class="uk-panel-title uk-margin-remove">基金规模(亿元)</h3>
+						    <b>${fund?.establishScale}</b>
+						</div>
+					</li>				
+					<li class="uk-width-1-2">
+						<div class="uk-panel uk-text-left">
+						    <h3 class="uk-panel-title uk-margin-remove">近3月收益</h3>
+						    #{if fund?.latest_3month_return != null }
+						    <b>${(fund?.latest_3month_return)?.format("0.00%")}</b>
+						    #{/if}
+						    #{else}
+						    <b></b>
+						    #{/else}
+						</div>
+					</li>				
+					<li class="uk-width-1-2">
+						<div class="uk-panel uk-text-left">
+						    <h3 class="uk-panel-title uk-margin-remove">近1年收益</h3>
+						    #{if fund?.latest_year_return != null}
+						    <b>${(fund?.latest_year_return)?.format("0.00%")}</b>
+						    #{/if}
+						    #{else}
+						    <b></b>
+						    #{/else}
+						</div>
+					</li>				
+				</ul>
+			</div>
+</div>
+<div id="fundInfo-tabindex">
+			<ul class="uk-tab" >
+			    <li><a href="/fund/info/${fund.fund_code}">净值走势</a></li>
+			    <li class="uk-active"><a href="/fund/info/detail/${fund.fund_code}">产品详情</a></li>
+			    <li><a href="/fund/info/holding/${fund.fund_code}">持仓情况</a></li>
+			    <li><a href="/fund/info/manager/${fund.fund_code}">基金经理</a></li>
+			    <li><a href="/fund/info/evaluation/${fund.fund_code}">基金评价</a></li>
+			</ul>
+</div>

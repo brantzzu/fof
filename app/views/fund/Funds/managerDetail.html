@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>基金信息-${fundType}</title>
+		<link href="http://cdn.bootcss.com/uikit/2.26.3/css/uikit.min.css" rel="stylesheet">
+		<link href="//cdn.bootcss.com/uikit/2.26.3/css/components/sticky.css" rel="stylesheet">
+		<link href="/public/stylesheets/fund/Funds/fundInfo.css" rel="stylesheet">
+		#{get 'moreCss' /}
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/uikit/2.26.3/js/uikit.min.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/sticky.js"></script>
+		<script src="//cdn.bootcss.com/uikit/2.26.3/js/components/pagination.js"></script>
+		<script src="//cdn.bootcss.com/echarts/3.2.1/echarts.min.js"></script>
+		#{get 'moreScripts'/}
+	</head>
+	<body>
+		#{include "./fundInfoHead.html" /}
+		<div class="uk-grid">
+			<div class="uk-width-1-1">
+			<ul class="uk-tab" data-uk-tab="{connect:'#my-id'}">
+			    #{list items:managers,as:'t'}
+			    <li><a href="/manager/info/${t.id}">${t.managerName}</a></li>
+			    #{/list}
+			</ul>
+
+			<!-- 包含内容项目的容器 -->
+			<ul id="my-id" class="uk-switcher uk-margin">
+			    #{list items:managers,as:'t'}
+			    <li>
+			    	<div class="uk-panel uk-panel-box">
+				    <h3 class="uk-panel-title"><b>基金经理</b></h3>
+					    <dl class="uk-description-list-line">
+						    <dt>基金经理姓名</dt>
+						    <dd><a href="/manager/info/${t.id}">${t.managerName}</a></dd>
+						    <dt>基金经理简介</dt>
+						    <dd>${t.managerIntro}</dd>
+						    <dt>任职开始日期</dt>
+						    <dd>${t.tenureStartDate}</dd>
+						    <dt>任职公司</dt>
+						    <dd>${t.tenureCompany}</dd>
+						</dl>
+					</div>
+			    </li>
+			    #{/list}
+			</ul>
+			</div>
+		</div>
+		<script>
+			$(function(){
+				$('#fundInfo-tabindex ul li').removeClass("uk-active");
+				$('#fundInfo-tabindex ul li:nth-child(4)').addClass("uk-active");
+			}); 
+		</script>
+	</body>
+</html>

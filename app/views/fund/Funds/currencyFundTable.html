@@ -1,0 +1,41 @@
+    <link href="/public/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/stylesheets/bootstrap-table.css" rel="stylesheet">
+    <script src="/public/javascripts/jquery.min.js"></script>
+    <script src="/public/javascripts/bootstrap.min.js"></script>
+    <script src="/public/javascripts/bootstrap-table.js"></script>
+ <table id="table"
+        data-toggle="table"
+               data-toolbar="#toolbar"
+               >
+        <thead>
+            <tr>
+                <th data-field="fund_name">名称</th>
+                <th data-field="nav">万份收益</th>
+                <th data-field="accumulatedNav">七日年华收益</th>
+            </tr>
+        </thead>
+    </table>
+<script>
+    $('#table').bootstrapTable({
+    url: '${jsonParameter}',
+    search: true,
+    pagination: true,
+    columns: [{
+        field: 'fund_name',
+        title: '名称',
+        		
+    }, {
+        field: 'nav',
+        title: '万份收益'
+    }, 
+    {
+        field: 'accumulatedNav',
+        title: '七日年华收益',
+        formatter: function (value, row, index) {  
+            var str = value + '%'
+            return str; 
+            }
+    },  
+    ]
+});
+</script>
